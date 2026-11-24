@@ -32,21 +32,74 @@ To perform fundamental Natural Language Processing (NLP) text preprocessing step
 
 ## Program
 
-#Text Preprocessing: Tokenization, Stopword Removal, and Lemmatization using NLTK
+# Text Preprocessing: Tokenization, Stopword Removal, and Lemmatization using NLTK  
 
+import nltk  
+import string  
 
-#Step 1: Download NLTK resources
+from nltk.tokenize import word_tokenize  
+from nltk.corpus import stopwords  
+from nltk.stem import WordNetLemmatizer  
 
-#Step 2: Sample customer feedback text
+# Step 1: Download NLTK resources  
+nltk.download('punkt')  
+nltk.download('punkt_tab')  
+nltk.download('stopwords') 
+nltk.download('wordnet')  
+nltk.download('omw-1.4')  
 
-#Step 3: Tokenization
+# Step 2: Sample customer feedback text  
+text = """The products are good, and customers love the fast delivery.  
+However, the packages were delayed."""  
 
-#Step 4: Stopword Removal & Punctuation Filtering
+print("Original Customer Feedback:")  
+print(text)  
 
-#Step 5: Lemmatization
+# Step 3: Tokenization  
+tokens = word_tokenize(text)  
 
+print("\nTokenized Words:")  
+print(tokens)  
+
+# Step 4: Stopword Removal and Punctuation Filtering  
+stop_words = set(stopwords.words('english'))  
+
+filtered_tokens = [  
+    word.lower() for word in tokens  
+    if word.isalpha() and word.lower() not in stop_words  
+]  
+
+print("\nAfter Stopword Removal and Punctuation Filtering:")  
+print(filtered_tokens)  
+
+# Step 5: Lemmatization  
+lemmatizer = WordNetLemmatizer()  
+
+lemmatized_words = [  
+    lemmatizer.lemmatize(word.lower())  
+    for word in filtered_tokens  
+]  
+
+print("\nFinal Lemmatized Words:")  
+print(lemmatized_words)  
 ## Output
+Original Customer Feedback:  
+The products are good, and customers love the fast delivery.  
+However, the packages were delayed.  
 
+Tokenized Words:  
+['The', 'products', 'are', 'good', ',', 'and',  
+ 'customers', 'love', 'the', 'fast', 'delivery',  
+ '.', 'However', ',', 'the', 'packages', 'were',  
+ 'delayed', '.']  
+
+After Stopword Removal and Punctuation Filtering:  
+['products', 'good', 'customers', 'love', 'fast',  
+ 'delivery', 'packages', 'delayed']  
+
+Final Lemmatized Words:  
+['product', 'good', 'customer', 'love', 'fast',  
+ 'delivery', 'package', 'delayed']  
 
 ## Result
 The program successfully performed tokenization, punctuation filtering, stopword removal, and lemmatization on the customer feedback text using the NLTK library.
